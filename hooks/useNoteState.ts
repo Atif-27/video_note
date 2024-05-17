@@ -18,7 +18,9 @@ export default function useNoteState() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(noteList));
+    if (noteList && Object.keys(noteList).length - 1 > 0) {
+      localStorage.setItem("notes", JSON.stringify(noteList));
+    }
   }, [noteList]);
   return { noteList, dispatch };
 }
@@ -53,11 +55,7 @@ const reducer = (state: NotesState, action: ActionType): NotesState => {
       };
     }
     case LOAD_NOTES: {
-      const { videoId, notes } = action.payload;
-      return {
-        ...state,
-        [videoId]: notes,
-      };
+      return action.payload;
     }
     default:
       return state;

@@ -16,4 +16,4 @@ export type ActionType =
       payload: { videoId: string; noteId: string; content: string };
     }
   | { type: "DELETE_NOTE"; payload: { videoId: string; noteId: string } }
-  | { type: "LOAD_NOTES"; payload: { videoId: string; notes: NoteType[] } };
+  | { type: "LOAD_NOTES"; payload: NotesState };
