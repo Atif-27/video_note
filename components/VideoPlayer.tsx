@@ -12,15 +12,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }: VideoPlayerProps) => {
   const { playerRef } = usePlayer();
   const opts = {
-    height: "390",
-    width: "640",
     playerVars: {
       autoplay: 1,
     },
   };
 
   return (
-    <div>
+    <div className="">
       <YouTube
         videoId={"I3JQNq7Cbt0"}
         opts={opts}
@@ -28,6 +26,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           console.log("Loadded");
           playerRef.current = event.target;
         }}
+        iframeClassName="w-full bg-black"
       />
     </div>
   );

@@ -1,13 +1,13 @@
 "use client";
 import useNoteState from "@/hooks/useNoteState";
-import { NotesState } from "@/interface/PlayerType";
+import { NoteType, NotesState } from "@/interface/PlayerType";
 import React, { createContext, useContext, useRef } from "react";
 import YouTube from "react-youtube";
 
 interface VideoContextType {
   playerRef: React.MutableRefObject<YouTube | null>;
   noteList: NotesState;
-  dispatch: React.Dispatch<any>;
+  handleAddNote: (videoId: string, note: NoteType) => void;
 }
 
 const PlayerContext = createContext<VideoContextType | null>(null);
@@ -19,12 +19,21 @@ export default function PlayerProvider({
 }) {
   const playerRef = useRef<YouTube | null>(null);
   const { noteList, dispatch } = useNoteState();
+  function handleAddNote(videoId: string, note: NoteType) {
+    dispatch({
+      type: "ADD_NOTE",
+      payload: {
+        videoId,
+        note,
+      },
+    });
+  }
   return (
     <PlayerContext.Provider
       value={{
         playerRef,
         noteList,
-        dispatch,
+        handleAddNote,
       }}
     >
       {children}
