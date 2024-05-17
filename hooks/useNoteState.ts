@@ -18,7 +18,9 @@ export default function useNoteState() {
   }, []);
 
   useEffect(() => {
-    if (noteList && Object.keys(noteList).length - 1 > 0) {
+    if (noteList && Object.keys(noteList).length > 0) {
+      console.log("inner");
+
       localStorage.setItem("notes", JSON.stringify(noteList));
     }
   }, [noteList]);

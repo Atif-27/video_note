@@ -3,6 +3,7 @@ import { usePlayer } from "@/context/PlayerContext";
 import { time, timeStamp } from "console";
 import React, { FormEvent } from "react";
 import TimeStamp from "./shared/TimeStamps";
+import { Button } from "./ui/button";
 
 export default function Notes({ videoId }: { videoId: string }) {
   const { playerRef, noteList, handleAddNote } = usePlayer();
@@ -33,7 +34,13 @@ export default function Notes({ videoId }: { videoId: string }) {
           <li key={index}>
             <p>{note.content}</p>
             <TimeStamp timestamp={note.timestamp}>{note.timestamp}</TimeStamp>
-            <button onClick={() => {}}>Delete</button>
+            <Button
+              onClick={() => {
+                console.log("Delete", note.id);
+              }}
+            >
+              Delete
+            </Button>
           </li>
         ))}
       </ul>
