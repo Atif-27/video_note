@@ -10,7 +10,7 @@ export default function Home() {
         <PlayerProvider>
           <h1 className="text-4xl font-semibold">Video Player with Notes</h1>
           <VideoPlayer videoId="I3JQNq7Cbt0" />
-          <TimeStamp timestamp={100}>10s</TimeStamp>
+          <TimeStamp timestamp={100} />
           <Notes videoId="I3JQNq7Cbt0" />
         </PlayerProvider>
       </div>
