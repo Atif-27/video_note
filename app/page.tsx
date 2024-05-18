@@ -1,19 +1,29 @@
-import Notes from "@/components/Notes";
-import VideoPlayer from "@/components/VideoPlayer";
-import TimeStamp from "@/components/shared/TimeStamps";
-import PlayerProvider from "@/context/PlayerContext";
+import Link from "next/link";
+import VideoCard from "@/components/VideoCard";
+import { VideoInfo } from "@/interface/VideoType";
 
-export default function Home() {
+async function fetchSearchVideo() {
+  const res = await fetch(process.env.NEXT_PUBLIC_API as string);
+  const data = await res.json();
+  return data.items;
+}
+
+export default async function Home() {
+  const searchVideo = await fetchSearchVideo();
+
   return (
-    <main className=" min-h-screen bg-slate-100    mx-auto">
-      <div className=" max-w-4xl mx-auto h-full pt-10">
-        <PlayerProvider>
-          <h1 className="text-4xl font-semibold">Video Player with Notes</h1>
-          <VideoPlayer videoId="I3JQNq7Cbt0" />
-          <TimeStamp timestamp={100} />
-          <Notes videoId="I3JQNq7Cbt0" />
-        </PlayerProvider>
+    <section className=" max-w-screen-2xl mx-auto w-full">
+      <h1 className="text-4xl font-semibold my-6 max-md:text-center">
+        MathonGo
+      </h1>
+      <div className="flex flex-wrap m-5 space-x-3 space-y-3 justify-center">
+        {searchVideo &&
+          searchVideo.map((video: VideoInfo) => (
+            <Link href={`/video/${video.id.videoId}`} key={video.id.videoId}>
+              <VideoCard info={video} />
+            </Link>
+          ))}
       </div>
-    </main>
+    </section>
   );
 }

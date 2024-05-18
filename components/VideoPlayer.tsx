@@ -19,7 +19,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className="my-7 max-md:p-2">
+    <div className="my-7 max-md:p-2  ">
       <YouTube
         videoId={videoId}
         opts={opts}
@@ -27,7 +27,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           console.log("Video Loadded");
           playerRef.current = event.target;
         }}
-        iframeClassName="w-full aspect-video h-full  bg-black"
+        iframeClassName="w-full aspect-video h-full  bg-black border shadow-xl  border-none rounded-md"
       />
     </div>
   );
