@@ -29,6 +29,7 @@ This project implements a responsive video player that allows users to play YouT
 
    ```plaintext
    NEXT_PUBLIC_API= https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&key=AIzaSyA7577UFBkZ4J9mxF0sK2lCFeP_1Hc85ug&q=mathongo
+   NEXT_PUBLIC_ID_API = https://youtube.googleapis.com/youtube/v3/videos?&key=AIzaSyA7577UFBkZ4J9mxF0sK2lCFeP_1Hc85ug&part=snippet%2Cstatistics%2Cstatus&id=
    ```
 
 5. **Run the development server:**
