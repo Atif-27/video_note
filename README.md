@@ -102,7 +102,8 @@ This project implements a responsive video player that allows users to play YouT
 ## Screenshots
 ![image](https://github.com/Atif-27/video_note/assets/116288316/2705b373-782e-48ac-8bd1-57831e776e0e)
 ![image](https://github.com/Atif-27/video_note/assets/116288316/a24f3b51-90fb-4a78-add5-a2cabc357108)
-![format](https://github.com/Atif-27/video_note/assets/116288316/97545594-8db7-41b7-ac37-d13e63c1fafc)
+![image](https://github.com/Atif-27/video_note/assets/116288316/cc40617a-e116-486b-b92f-d0910b256720)
+
 
 
 
