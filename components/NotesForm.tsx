@@ -86,13 +86,12 @@ export default function NotesForm({
           A Note will be added to the video at the current timestamp.
         </DialogDescription>
       </DialogHeader>
-      <div className="react-quill-container">
+      <div className="react-quill-container bg-red-200">
         <ReactQuill
           value={formState.content}
           onChange={handleQuillChange}
           modules={{
             toolbar: [
-              [{ header: "1" }, { header: "2" }],
               ["bold", "italic", "underline", "strike"],
               ["clean"],
               [{ color: ["red", "blue", "yellow"] }],
@@ -100,7 +99,7 @@ export default function NotesForm({
           }}
           theme="snow"
           placeholder="Enter your note here..."
-          className="react-quill-editor  overflow-y-auto"
+          className="react-quill-editor   overflow-y-auto"
         />
       </div>
       <div>

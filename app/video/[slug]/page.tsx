@@ -14,7 +14,7 @@ export default function Page({
     <main className=" min-h-screen bg-slate-100    mx-auto">
       <div className=" max-w-4xl mx-auto h-full pt-10 ">
         <PlayerProvider>
-          <h1 className="text-4xl max-md:text-3xl max-sm:text-xl max-md:text-center font-semibold">
+          <h1 className="text-4xl max-md:text-3xl max-sm:text-xl max-md:text-center w-full font-semibold">
             Video Player with Note
           </h1>
           <VideoPlayer videoId={slug} />
