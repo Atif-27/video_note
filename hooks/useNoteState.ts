@@ -10,6 +10,7 @@ import { useEffect, useReducer } from "react";
 // ! This hook is used to manage the state of notes for each video.
 export default function useNoteState() {
   const [noteList, dispatch] = useReducer(reducer, {});
+  // This effect is used to load the notes from the local storage when the component mounts
   useEffect(() => {
     const savedNotes = localStorage.getItem("notes");
     if (savedNotes) {
@@ -17,6 +18,7 @@ export default function useNoteState() {
     }
   }, []);
 
+  // This effect is used to save the notes to the local storage when the notes state changes
   useEffect(() => {
     if (noteList && Object.keys(noteList).length > 0) {
       localStorage.setItem("notes", JSON.stringify(noteList));

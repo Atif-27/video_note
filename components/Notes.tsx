@@ -11,8 +11,9 @@ import {
 import NotesList from "./NotesList";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { IoMdAddCircleOutline } from "react-icons/io";
-
 import NotesForm from "./NotesForm";
+
+//! This component is used to display the notes section of the application
 export default function Notes({ videoId }: { videoId: string }) {
   const [open, setOpen] = useState(false);
 
@@ -22,11 +23,12 @@ export default function Notes({ videoId }: { videoId: string }) {
         <CardHeader>
           <CardTitle>My Notes</CardTitle>
           <CardDescription>
-            All your notes at a single place. Click on any note to go to
+            All your notes at a single place. Click on any timestamp to go to
             specific timestamp in the video.
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {/* Add A Note Button */}
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <div className="flex justify-end">
@@ -41,6 +43,7 @@ export default function Notes({ videoId }: { videoId: string }) {
             </DialogContent>
           </Dialog>
 
+          {/* Note List Component */}
           <NotesList videoId={videoId} />
         </CardContent>
       </Card>

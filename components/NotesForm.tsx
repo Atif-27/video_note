@@ -14,28 +14,40 @@ import Image from "next/image";
 import { convertImageToBase64 } from "@/utils/imageUtil";
 import type { NoteType } from "@/interface/PlayerType";
 
+interface NotesFormProps {
+  videoId: string;
+  content?: NoteType;
+  setOpen: (open: boolean) => void;
+}
+
+const initialState: NoteType = {
+  content: "",
+  id: "",
+  timestamp: 0,
+  date: "",
+  image: "",
+};
+
 export default function NotesForm({
   videoId,
   content,
   setOpen,
-}: {
-  videoId: string;
-  content?: NoteType;
-  setOpen: (open: boolean) => void;
-}) {
-  const [quillState, setQuillState] = useState(() => content?.content || "");
-  const [imageBase64, setImageBase64] = useState<string | null>(
-    () => content?.image || null
-  );
+}: NotesFormProps) {
+  const [formState, setFormState] = useState<NoteType>(content || initialState);
   const { handleAddNote, handleEditNote, playerRef } = usePlayer();
+
   const isAddMode = !content;
+
+  function handleQuillChange(content: string) {
+    setFormState((prev) => ({ ...prev, content }));
+  }
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
       try {
         const base64 = await convertImageToBase64(file);
-        setImageBase64(base64);
+        setFormState((prev) => ({ ...prev, image: base64 }));
       } catch (error) {
         console.error("Error converting image to base64", error);
       }
@@ -45,57 +57,53 @@ export default function NotesForm({
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newContent = {
-      content: quillState,
-      id: content?.id || Math.random().toString(),
+      ...formState,
+      date: formState.date ? formState.date : new Date().toLocaleDateString(),
+      id: content?.id || Math.random().toString(36).substr(2, 9),
       // @ts-ignore
-      timestamp: playerRef.current?.getCurrentTime(),
-      date: content?.date || new Date().toLocaleDateString(),
-      image: imageBase64 as string,
+      timestamp: playerRef.current?.getCurrentTime() || 0,
     };
-    if (isAddMode) handleAddNote(videoId, newContent);
-    else handleEditNote(videoId, content.id, newContent);
+
+    if (isAddMode) {
+      handleAddNote(videoId, newContent);
+    } else {
+      handleEditNote(videoId, content.id, newContent);
+    }
     setOpen(false);
-    setQuillState("");
-    setImageBase64(null);
+    setFormState(initialState);
   }
-  console.log(isAddMode);
 
   return (
-    <form onSubmit={handleSubmit} className=" space-y-3 mb-4 ">
+    <form onSubmit={handleSubmit} className="space-y-3 mb-4">
       <DialogHeader>
-        <DialogTitle>Add a Note</DialogTitle>
+        <DialogTitle>{isAddMode ? "Add a Note" : "Edit Note"}</DialogTitle>
         <DialogDescription>
           A Note will be added to the video at the current timestamp.
         </DialogDescription>
       </DialogHeader>
-      <div className="react-quill-container ">
+      <div className="react-quill-container">
         <ReactQuill
-          value={quillState}
-          onChange={setQuillState}
+          value={formState.content}
+          onChange={handleQuillChange}
           modules={{
             toolbar: [
               [{ header: "1" }, { header: "2" }],
               ["bold", "italic", "underline", "strike"],
               ["clean"],
-              [
-                {
-                  color: ["red", "blue", "yellow"],
-                },
-              ],
+              [{ color: ["red", "blue", "yellow"] }],
             ],
           }}
           theme="snow"
           placeholder="Enter your note here..."
-          className="react-quill-editor w-full   overflow-y-auto"
+          className="react-quill-editor w-full overflow-y-auto"
         />
       </div>
       <div>
-        {imageBase64 && (
-          <Image src={imageBase64} alt="Preview" width={200} height={200} />
+        {formState.image && (
+          <Image src={formState.image} alt="Preview" width={200} height={200} />
         )}
         <Input type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
-
       <DialogFooter>
         <Button type="submit">Save changes</Button>
       </DialogFooter>

@@ -1,7 +1,12 @@
 "use client";
 import useNoteState from "@/hooks/useNoteState";
 import { NoteType, NotesState } from "@/interface/PlayerType";
-import React, { createContext, useContext, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  type ReactNode,
+} from "react";
 import YouTube from "react-youtube";
 
 interface VideoContextType {
@@ -14,13 +19,11 @@ interface VideoContextType {
 
 const PlayerContext = createContext<VideoContextType | null>(null);
 
-export default function PlayerProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const playerRef = useRef<YouTube | null>(null);
-  const { noteList, dispatch } = useNoteState();
+//! This is the provider that wraps the video player and the notes list
+export default function PlayerProvider({ children }: { children: ReactNode }) {
+  const playerRef = useRef<YouTube | null>(null); //? This is the reference to the video player
+  const { noteList, dispatch } = useNoteState(); //? This is the custom hook that manages the notes state using useReducer
+  // This function is called when the user adds a note
   function handleAddNote(videoId: string, note: NoteType) {
     dispatch({
       type: "ADD_NOTE",
@@ -30,6 +33,7 @@ export default function PlayerProvider({
       },
     });
   }
+  // This function is called when the user deletes a note
   function handleDeleteNote(videoId: string, noteId: string) {
     dispatch({
       type: "DELETE_NOTE",
@@ -39,6 +43,7 @@ export default function PlayerProvider({
       },
     });
   }
+  // This function is called when the user edits a note
   function handleEditNote(videoId: string, noteId: string, content: NoteType) {
     dispatch({
       type: "EDIT_NOTE",
@@ -49,7 +54,9 @@ export default function PlayerProvider({
       },
     });
   }
+
   return (
+    // This is the context provider that provides the player reference and the notes list to the components
     <PlayerContext.Provider
       value={{
         playerRef,

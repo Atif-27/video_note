@@ -1,13 +1,21 @@
-export function formatTimestamp(seconds: number): string {
-  const hrs = Math.floor(seconds / 3600);
-  const mins = Math.floor((seconds % 3600) / 60);
-  const secs = Math.floor(seconds % 60);
-  const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
-  const formattedMins = mins < 10 ? `0${mins}` : `${mins}`;
+import { Duration } from "luxon";
 
-  if (hrs > 0) {
-    return `${hrs}:${formattedMins}:${formattedSecs}`;
+export default function formatTimestamp(seconds: number) {
+  const duration = Duration.fromObject({ seconds });
+  const hours = Math.floor(duration.as("hours"));
+  const minutes = Math.floor(duration.as("minutes")) % 60;
+  const remainingSeconds = duration.seconds % 60;
+
+  const formattedHours = String(hours).padStart(2, "0");
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(Math.floor(remainingSeconds)).padStart(
+    2,
+    "0"
+  );
+
+  if (hours > 0) {
+    return `${formattedHours} hr ${formattedMinutes} min ${formattedSeconds} sec`;
   } else {
-    return `${mins}:${formattedSecs}`;
+    return `${formattedMinutes} min ${formattedSeconds} sec`;
   }
 }

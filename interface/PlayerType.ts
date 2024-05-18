@@ -1,3 +1,4 @@
+// Interface of a note object
 export interface NoteType {
   id: string;
   timestamp: number;
@@ -6,10 +7,12 @@ export interface NoteType {
   content: string;
 }
 
+// Interface of the notes state object
 export interface NotesState {
   [videoId: string]: NoteType[];
 }
 
+// Interface of the action object for the reducer
 export type ActionType =
   | {
       type: "ADD_NOTE";

@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import TimeStamp from "./shared/TimeStamps";
 import { Button } from "@/components/ui/button";
 import { usePlayer } from "@/context/PlayerContext";
@@ -7,17 +6,20 @@ import Image from "next/image";
 import { useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import NotesForm from "./NotesForm";
-export default function NotesList({ videoId }: { videoId: string }) {
-  const [open, setOpen] = useState(false);
 
+export default function NotesList({ videoId }: { videoId: string }) {
   const { noteList, handleDeleteNote } = usePlayer();
   const notes = noteList[videoId] || [];
+
+  // Manage individual open state for each note edit dialog
+  const [openNoteId, setOpenNoteId] = useState<string | null>(null);
+
   return (
     <section className="mt-8">
       <div className=" flex flex-col gap-4">
         {notes.map((note) => (
-          <Card key={note.id} className="w-full  ">
-            <CardContent className="p-6  space-y-3">
+          <Card key={note.id} className="w-full">
+            <CardContent className="p-6 space-y-3">
               <div>
                 <div className="font-semibold">{note.date}</div>
                 <div className="flex space-x-2">
@@ -44,14 +46,21 @@ export default function NotesList({ videoId }: { videoId: string }) {
                 >
                   Delete Note
                 </Button>
-                <Dialog open={open} onOpenChange={setOpen}>
+                <Dialog
+                  open={openNoteId === note.id}
+                  onOpenChange={(isOpen) => {
+                    setOpenNoteId(isOpen ? note.id : null);
+                  }}
+                >
                   <DialogTrigger asChild>
                     <Button variant={"outline"}>Edit Note</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[925px]  max-h-screen   ">
+                  <DialogContent className="sm:max-w-[925px] max-h-screen">
                     <NotesForm
                       videoId={videoId}
-                      setOpen={setOpen}
+                      setOpen={(isOpen) => {
+                        setOpenNoteId(isOpen ? note.id : null);
+                      }}
                       content={note}
                     />
                   </DialogContent>
