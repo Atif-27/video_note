@@ -9,7 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import NotesBox from "./NotesList";
+import NotesList from "./NotesList";
+import NotesForm from "./NotesForm";
 
 export default function Notes({ videoId }: { videoId: string }) {
   return (
@@ -23,7 +24,8 @@ export default function Notes({ videoId }: { videoId: string }) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <NotesBox videoId={videoId} />
+          <NotesForm videoId={videoId} />
+          <NotesList videoId={videoId} />
         </CardContent>
       </Card>
     </section>

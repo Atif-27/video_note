@@ -8,6 +8,8 @@ interface VideoContextType {
   playerRef: React.MutableRefObject<YouTube | null>;
   noteList: NotesState;
   handleAddNote: (videoId: string, note: NoteType) => void;
+  handleDeleteNote: (videoId: string, noteId: string) => void;
+  handleEditNote: (videoId: string, noteId: string, content: string) => void;
 }
 
 const PlayerContext = createContext<VideoContextType | null>(null);
@@ -28,12 +30,33 @@ export default function PlayerProvider({
       },
     });
   }
+  function handleDeleteNote(videoId: string, noteId: string) {
+    dispatch({
+      type: "DELETE_NOTE",
+      payload: {
+        videoId,
+        noteId,
+      },
+    });
+  }
+  function handleEditNote(videoId: string, noteId: string, content: string) {
+    dispatch({
+      type: "EDIT_NOTE",
+      payload: {
+        videoId,
+        noteId,
+        content,
+      },
+    });
+  }
   return (
     <PlayerContext.Provider
       value={{
         playerRef,
         noteList,
         handleAddNote,
+        handleDeleteNote,
+        handleEditNote,
       }}
     >
       {children}
