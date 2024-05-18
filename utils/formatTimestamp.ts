@@ -1,5 +1,5 @@
 import { Duration } from "luxon";
-
+// This function takes a number of seconds and returns a formatted string
 export default function formatTimestamp(seconds: number) {
   const duration = Duration.fromObject({ seconds });
   const hours = Math.floor(duration.as("hours"));

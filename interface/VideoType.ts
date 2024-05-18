@@ -1,3 +1,4 @@
+// This file contains the interface for the video type.
 export interface VideoInfo {
   id: { videoId: string };
   snippet: {

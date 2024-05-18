@@ -29,6 +29,7 @@ const initialState: NoteType = {
   image: "",
 };
 
+// This component is used to display the form to add or edit a note
 export default function NotesForm({
   videoId,
   content,
@@ -39,10 +40,11 @@ export default function NotesForm({
 
   const isAddMode = !content;
 
+  // This function is called when the user types in the editor
   function handleQuillChange(content: string) {
     setFormState((prev) => ({ ...prev, content }));
   }
-
+  // This function is called when the user uploads an image
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
@@ -54,7 +56,7 @@ export default function NotesForm({
       }
     }
   }
-
+  // This function is called when the user submits the form
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newContent = {

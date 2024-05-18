@@ -8,6 +8,7 @@ import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import NotesForm from "./NotesForm";
 import Empty from "@/public/empty.jpg";
 
+// This component is used to display the notes list of the application
 export default function NotesList({ videoId }: { videoId: string }) {
   const { noteList, handleDeleteNote } = usePlayer();
   const notes = noteList[videoId] || [];

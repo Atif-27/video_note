@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { VideoInfo } from "@/interface/VideoType";
 
+// ! This component is used to display the video card.
 const VideoCard = ({ info }: { info: VideoInfo }) => {
   const { snippet, statistics } = info;
   const { channelTitle, title, thumbnails } = snippet;
