@@ -1,5 +1,7 @@
 "use client";
 import { usePlayer } from "@/context/PlayerContext";
+import { formatTimestamp } from "@/utils/formatTimestamp";
+import { format } from "path";
 import React from "react";
 
 export default function TimeStamp({ timestamp }: { timestamp: number }) {
@@ -12,5 +14,7 @@ export default function TimeStamp({ timestamp }: { timestamp: number }) {
     // @ts-ignore
     playerRef.current.seekTo(timestamp);
   }
-  return <button onClick={handleTimestamp}>{Number(timestamp)}</button>;
+  return (
+    <button onClick={handleTimestamp}>{formatTimestamp(timestamp)}</button>
+  );
 }
