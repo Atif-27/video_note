@@ -9,7 +9,7 @@ This project implements a responsive video player that allows users to play YouT
 1. **Clone the repository:**
 
    ```bash
-   https://github.com/Atif-27/video_note.git
+    git clone https://github.com/Atif-27/video_note.git
    cd video_note
    ```
 
