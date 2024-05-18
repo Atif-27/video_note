@@ -9,7 +9,7 @@ interface VideoContextType {
   noteList: NotesState;
   handleAddNote: (videoId: string, note: NoteType) => void;
   handleDeleteNote: (videoId: string, noteId: string) => void;
-  handleEditNote: (videoId: string, noteId: string, content: string) => void;
+  handleEditNote: (videoId: string, noteId: string, note: NoteType) => void;
 }
 
 const PlayerContext = createContext<VideoContextType | null>(null);
@@ -39,13 +39,13 @@ export default function PlayerProvider({
       },
     });
   }
-  function handleEditNote(videoId: string, noteId: string, content: string) {
+  function handleEditNote(videoId: string, noteId: string, content: NoteType) {
     dispatch({
       type: "EDIT_NOTE",
       payload: {
         videoId,
         noteId,
-        content,
+        note: content,
       },
     });
   }

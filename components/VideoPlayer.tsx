@@ -18,12 +18,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className="">
+    <div className="my-7">
       <YouTube
-        videoId={"I3JQNq7Cbt0"}
+        videoId={videoId}
         opts={opts}
         onReady={(event) => {
-          console.log("Loadded");
+          console.log("Video Loadded");
           playerRef.current = event.target;
         }}
         iframeClassName="w-full bg-black"

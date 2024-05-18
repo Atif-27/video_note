@@ -15,6 +15,8 @@ export default function TimeStamp({ timestamp }: { timestamp: number }) {
     playerRef.current.seekTo(timestamp);
   }
   return (
-    <button onClick={handleTimestamp}>{formatTimestamp(timestamp)}</button>
+    <button className="text-cyan-600 underline" onClick={handleTimestamp}>
+      {formatTimestamp(timestamp)}
+    </button>
   );
 }

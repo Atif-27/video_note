@@ -37,9 +37,11 @@ const reducer = (state: NotesState, action: ActionType): NotesState => {
       };
     }
     case EDIT_NOTE: {
-      const { videoId, noteId, content } = action.payload;
+      const { videoId, noteId, note: newNote } = action.payload;
+      console.log(newNote);
+
       const notes = state[videoId].map((note) =>
-        note.id === noteId ? { ...note, content } : note
+        note.id === newNote.id ? newNote : note
       );
       return {
         ...state,
