@@ -1,8 +1,15 @@
 import Notes from "@/components/Notes";
 import VideoPlayer from "@/components/VideoPlayer";
 import PlayerProvider from "@/context/PlayerContext";
+import console from "console";
 
-export default function Page({
+async function fetchVideoDetails(videoId: string) {
+  const data = await fetch(process.env.NEXT_PUBLIC_ID_API + videoId);
+  const res = await data.json();
+  return res;
+}
+
+export default async function Page({
   params,
 }: {
   params: {
@@ -10,6 +17,10 @@ export default function Page({
   };
 }) {
   const { slug } = params;
+  const videoDetails = await fetchVideoDetails(slug);
+  console.log(videoDetails);
+  const data = videoDetails.items[0];
+
   return (
     <main className=" min-h-screen bg-slate-100    mx-auto">
       <div className=" max-w-4xl mx-auto h-full pt-10 ">
@@ -18,6 +29,12 @@ export default function Page({
             Video Player with Note
           </h1>
           <VideoPlayer videoId={slug} />
+          <section className="my-4 mb-8 max-md:px-3">
+            <div className="text-2xl max-md:text-lg font-semibold">
+              {data?.snippet?.title}
+            </div>
+            <p className="text-sm ">{data.snippet.description}</p>
+          </section>
           <Notes videoId={slug} />
         </PlayerProvider>
       </div>

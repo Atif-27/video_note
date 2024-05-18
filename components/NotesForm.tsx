@@ -59,6 +59,7 @@ export default function NotesForm({
   // This function is called when the user submits the form
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!formState.content) return;
     const newContent = {
       ...formState,
       date: formState.date ? formState.date : new Date().toLocaleDateString(),
@@ -86,7 +87,7 @@ export default function NotesForm({
           A Note will be added to the video at the current timestamp.
         </DialogDescription>
       </DialogHeader>
-      <div className="react-quill-container bg-red-200">
+      <div className="react-quill-container ">
         <ReactQuill
           value={formState.content}
           onChange={handleQuillChange}
