@@ -18,7 +18,7 @@ export default function Notes({ videoId }: { videoId: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <section id="Notes">
+    <section id="Notes" className="mb-6">
       <Card>
         <CardHeader>
           <CardTitle>My Notes</CardTitle>
@@ -34,7 +34,7 @@ export default function Notes({ videoId }: { videoId: string }) {
               <div className="flex justify-end">
                 <Button variant="outline" className="flex gap-2  w-fit ">
                   <IoMdAddCircleOutline />
-                  Add a Note
+                  Add new Note
                 </Button>
               </div>
             </DialogTrigger>

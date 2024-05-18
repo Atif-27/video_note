@@ -61,8 +61,10 @@ export default function NotesForm({
       ...formState,
       date: formState.date ? formState.date : new Date().toLocaleDateString(),
       id: content?.id || Math.random().toString(36).substr(2, 9),
-      // @ts-ignore
-      timestamp: playerRef.current?.getCurrentTime() || 0,
+
+      timestamp:
+        // @ts-ignore
+        formState.timestamp || playerRef.current?.getCurrentTime() || 0,
     };
 
     if (isAddMode) {
@@ -96,7 +98,7 @@ export default function NotesForm({
           }}
           theme="snow"
           placeholder="Enter your note here..."
-          className="react-quill-editor w-full overflow-y-auto"
+          className="react-quill-editor  overflow-y-auto"
         />
       </div>
       <div>

@@ -29,15 +29,31 @@ export default function NotesList({ videoId }: { videoId: string }) {
               </div>
               <div className="flex gap-2">
                 {note.image && (
-                  <Image
-                    src={note.image}
-                    alt="note image"
-                    width={100}
-                    height={100}
-                  />
+                  <Dialog>
+                    <DialogTrigger>
+                      <Image
+                        src={note.image}
+                        alt="note image"
+                        width={250}
+                        height={250}
+                      />
+                    </DialogTrigger>
+                    <DialogContent className=" max-w-4xl max-md:max-w-full flex justify-center items-center  ">
+                      <Image
+                        src={note.image}
+                        alt="note image"
+                        height={900}
+                        width={900}
+                        className="object-contain p-4 "
+                      />
+                    </DialogContent>
+                  </Dialog>
                 )}
               </div>
-              <div dangerouslySetInnerHTML={{ __html: note.content }}></div>
+              <p
+                className=" p-2 px-3 border border-gray-300 rounded-xl break-words"
+                dangerouslySetInnerHTML={{ __html: note.content }}
+              ></p>
 
               <div className="flex justify-end gap-4">
                 <Button
