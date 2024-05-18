@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { usePlayer } from "@/context/PlayerContext";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +10,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import { convertImageToBase64 } from "@/utils/imageUtil";
