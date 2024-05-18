@@ -9,8 +9,8 @@ This project implements a responsive video player that allows users to play YouT
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/video-player-with-notes.git
-   cd video-player-with-notes
+   https://github.com/Atif-27/video_note.git
+   cd video_note
    ```
 
 2. **Install dependencies:**
